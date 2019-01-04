@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tic_Tac_Toe</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link src="tic_tac_toe.js" type="text/javascript" />
+  </head>
+  <body class = "page">
+    <div><h1 class="heading">Welcome to Tic-Tac-Toe !!</h1></div>
+    <div class="center" id="mainDiv">
+      <table>
+        <tr>
+          <td>
+            <div class="cell" id="1" onclick="displaySymbol(1)"></div>
+          </td>
+          <td>
+            <div class="cell" id="2" onclick="displaySymbol(2)"></div>
+          </td>
+          <td>
+            <div class="cell" id="3" onclick="displaySymbol(3)"></div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="cell" id="4" onclick="displaySymbol(4)"></div>
+          </td>
+          <td>
+            <div class="cell" id="5" onclick="displaySymbol(5)"></div>
+          </td>
+          <td>
+            <div class="cell" id="6" onclick="displaySymbol(6)"></div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="cell" id="7" onclick="displaySymbol(7)"></div>
+          </td>
+          <td>
+            <div class="cell" id="8" onclick="displaySymbol(8)"></div>
+          </td>
+          <td>
+            <div class="cell" id="9" onclick="displaySymbol(9)"></div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div id="infoDiv">Lets Play</div>
+    <div>
+      <button class = "button" onclick="getPlayerNames()">Start Game</button>
+      <a href="http://localhost:8000/ticTacToe.html">
+        <button class = "button"  >Reset</button></a
+      >
+    </div>
+  </body>
+  <script src="./tic_tac_toe.js"></script>
+</html>
