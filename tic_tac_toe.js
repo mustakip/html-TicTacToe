@@ -2,16 +2,26 @@ const isSubset = function(superSet, subsetCandidate) {
   return subsetCandidate.every(element => superSet.includes(element));
 };
 
-let counter = 0;
-const symbols = ["X", "O"];
-
-const moves = {
-  O: [],
-  X: []
+const isValidMove = function(id) {
+  return !cells.includes(id);
 };
+
+const cycler = function(range) {
+  let counter = 0;
+  return function(list) {
+    index = counter++ % range;
+    return list[index];
+  };
+};
+
+const getPlayer = cycler(2);
+
 const cells = [];
 
-const playerNames = {};
+const players = {
+  player1: {symbol: "X", moves: []},
+  player2: {symbol: "O", moves: []}
+};
 
 const makeImageTag = function(imgClass, imagePath) {
   return `<img class = '${imgClass}' src = '${imagePath}'/>`;
@@ -40,26 +50,47 @@ const displayResult = function(result) {
   mainBlock.className = "result";
 };
 
-const displaySymbol = function(id) {
-  if (!cells.includes(id)) {
-    let block = document.getElementById(id);
-    let symbol = symbols[counter++ % 2];
-    block.innerHTML = getImageTag(symbol);
-    cells.push(id);
-    moves[symbol].push(id);
+const displaySymbol = function(symbol, id) {
+  let block = document.getElementById(id);
+  block.innerHTML = getImageTag(symbol);
+};
 
-    if (hasWon(moves[symbol])) {
-      displayResult("win");
-      displayInfo(playerNames[symbol] + " has Won the game");
-      let block = document.getElementById("divsTable");
-      block.onload = 'null'
-      return;
-    }
-    if (counter === 9) {
-      displayResult("draw");
-      document.getElementById("infoDiv").innerText = "Match Draw";
-    }
+const checkForWin = function(moves, playerName) {
+  if (hasWon(moves)) {
+    displayResult("win");
+    displayInfo(playerName + " Won the game");
+    return true;
   }
+  return false;
+};
+
+const checkForDraw = function(hasWon) {
+  if (cells.length == 9 && !hasWon) {
+    displayResult("draw");
+    displayInfo("Match Draw");
+  }
+};
+
+const executeMove = function(id) {
+  let player = getPlayer(["player1", "player2"]);
+  let {name, symbol, moves} = players[player];
+  displaySymbol(symbol, id);
+
+  cells.push(id);
+  moves.push(id);
+
+  let hasWon = checkForWin(moves, name);
+  checkForDraw(hasWon);
+  players[player]["moves"] = moves;
+};
+
+
+const makeMove = function(id) {
+  if (isValidMove(id)) {
+    executeMove(id);
+    return;
+  }
+  displayInfo("Invalid Move. Please try again.");
 };
 
 const hasWon = function(playerMoves) {
@@ -79,9 +110,10 @@ const hasWon = function(playerMoves) {
 const getPlayerNames = function() {
   let player1 = prompt("Enter Player - 1 Name :  ");
   let player2 = prompt("Enter Player - 2 Name :  ");
-  let info = player1 + "'s symbol is X\n";
-  info += player2 + "'s symbol is O";
-  displayInfo(info);
-  playerNames["X"] = player1;
-  playerNames["O"] = player2;
+  let symbolInfo = player1 + "'s symbol is X\n";
+  symbolInfo += player2 + "'s symbol is O";
+  displayInfo(symbolInfo);
+  players.player1.name = player1;
+  players.player2.name = player2;
+  console.log(players);
 };
