@@ -19,8 +19,8 @@ const makeImageTag = function(imgClass, imagePath) {
 
 const getImageTag = function(symbol) {
   const symbolImages = {
-    X: "/images/cross.png",
-    O: "/images/o.png"
+    X: "images/cross.png",
+    O: "images/o.png"
   };
   return makeImageTag("symbol", symbolImages[symbol]);
 };
@@ -30,16 +30,14 @@ const displayInfo = function(msg) {
   infoBlock.innerText = msg;
 };
 
-const displayWin = function() {
+const displayResult = function(result) {
+  let resultImages = {
+    win: makeImageTag("winOrDraw", "images/win.jpg"),
+    draw: makeImageTag("winOrDraw", "images/draw.jpg")
+  };
   let mainBlock = document.getElementById("mainDiv");
-  mainBlock.innerHTML = makeImageTag("winOrDraw","/images/win.jpg");
-  mainBlock.setAttribute("style", "border:0px");
-};
-
-const displayDraw = function() {
-  let mainBlock = document.getElementById("mainDiv");
-  mainBlock.innerHTML = makeImageTag("winOrDraw", "/images/draw.jpg");
-  mainBlock.setAttribute("style", "border:0px");
+  mainBlock.innerHTML = resultImages[result];
+  mainBlock.className = "result";
 };
 
 const displaySymbol = function(id) {
@@ -51,12 +49,14 @@ const displaySymbol = function(id) {
     moves[symbol].push(id);
 
     if (hasWon(moves[symbol])) {
-      displayWin();
+      displayResult("win");
       displayInfo(playerNames[symbol] + " has Won the game");
+      let block = document.getElementById("divsTable");
+      block.onload = 'null'
       return;
     }
     if (counter === 9) {
-      displayDraw();
+      displayResult("draw");
       document.getElementById("infoDiv").innerText = "Match Draw";
     }
   }
@@ -84,5 +84,4 @@ const getPlayerNames = function() {
   displayInfo(info);
   playerNames["X"] = player1;
   playerNames["O"] = player2;
-  console.log(cells);
 };

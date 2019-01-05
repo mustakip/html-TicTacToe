@@ -56,4 +56,9 @@
   border:2px solid black;
 }
 
+.result {
+  width:400px;
+  height:200px;
+  margin-left: 500px;
+}
 
