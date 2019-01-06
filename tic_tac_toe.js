@@ -57,7 +57,8 @@ const displaySymbol = function(symbol, id) {
 
 const checkForWin = function(moves, playerName) {
   if (hasWon(moves)) {
-    displayResult("win");
+    // displayResult("win");
+    turnOffListner();
     displayInfo(playerName + " Won the game");
     return true;
   }
@@ -66,9 +67,17 @@ const checkForWin = function(moves, playerName) {
 
 const checkForDraw = function(hasWon) {
   if (cells.length == 9 && !hasWon) {
-    displayResult("draw");
+    // displayResult("draw");
     displayInfo("Match Draw");
   }
+};
+
+const turnOffListner = function() {
+  let cells = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  cells.map(cellId => {
+    let cell = document.getElementById(cellId);
+    cell.setAttribute("onclick", "null");
+  });
 };
 
 const executeMove = function(id) {
@@ -83,7 +92,6 @@ const executeMove = function(id) {
   checkForDraw(hasWon);
   players[player]["moves"] = moves;
 };
-
 
 const makeMove = function(id) {
   if (isValidMove(id)) {
