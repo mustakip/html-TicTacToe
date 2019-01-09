@@ -5,49 +5,43 @@
     <link rel="stylesheet" type="text/css" href="style.css" />
     <link src="tic_tac_toe.js" type="text/javascript" />
   </head>
-  <body class = "page">
+  <body class="page">
     <div><h1 class="heading">Welcome to Tic-Tac-Toe !!</h1></div>
-    <div class="center" id="mainDiv">
-      <table id = "divsTable">
-        <tr>
-          <td>
-            <div class="cell" id="1" onclick="makeMove(1)"></div>
-          </td>
-          <td>
-            <div class="cell" id="2" onclick="makeMove(2)"></div>
-          </td>
-          <td>
-            <div class="cell" id="3" onclick="makeMove(3)"></div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="cell" id="4" onclick="makeMove(4)"></div>
-          </td>
-          <td>
-            <div class="cell" id="5" onclick="makeMove(5)"></div>
-          </td>
-          <td>
-            <div class="cell" id="6" onclick="makeMove(6)"></div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="cell" id="7" onclick="makeMove(7)"></div>
-          </td>
-          <td>
-            <div class="cell" id="8" onclick="makeMove(8)"></div>
-          </td>
-          <td>
-            <div class="cell" id="9" onclick="makeMove(9)"></div>
-          </td>
-        </tr>
-      </table>
-    </div>
-    <div id="infoDiv">Lets Play</div>
-    <div>
-      <button class = "button" onclick="getPlayerNames()">Start Game</button>
-      <button class = "button" onclick="location.reload()">Reset</button>
+    <div style="display:flex">
+      <div class="inputBoard">
+        <div style="margin-bottom: 100px;font-size: 30px">
+          <h5>Player-1 :</h5>
+          <input id = "player1" class="inputBlocks" type="text" />
+          <h5>Player-2 :</h5>
+          <input id="player2" class="inputBlocks" type="text" />
+        </div>
+        <div>
+          <button class="button" onclick="getPlayerNames()">Start Game</button>
+          <button class="button" onclick="location.reload()">Reset</button>
+        </div>
+      </div>
+
+      <div class="playGround">
+        <table id="table">
+          <tr>
+            <td><div class="cell" id="1" onclick="makeMove(1)"></div></td>
+            <td><div class="cell" id="2" onclick="makeMove(2)"></div></td>
+            <td><div class="cell" id="3" onclick="makeMove(3)"></div></td>
+          </tr>
+          <tr>
+            <td><div class="cell" id="4" onclick="makeMove(4)"></div></td>
+            <td><div class="cell" id="5" onclick="makeMove(5)"></div></td>
+            <td><div class="cell" id="6" onclick="makeMove(6)"></div></td>
+          </tr>
+          <tr>
+            <td><div class="cell" id="7" onclick="makeMove(7)"></div></td>
+            <td><div class="cell" id="8" onclick="makeMove(8)"></div></td>
+            <td><div class="cell" id="9" onclick="makeMove(9)"></div></td>
+          </tr>
+        </table>
+
+        <div id="infoDiv">Lets Play</div>
+      </div>
     </div>
   </body>
   <script src="./tic_tac_toe.js"></script>

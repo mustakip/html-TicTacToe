@@ -57,7 +57,6 @@ const displaySymbol = function(symbol, id) {
 
 const checkForWin = function(moves, playerName) {
   if (hasWon(moves)) {
-    // displayResult("win");
     turnOffListner();
     displayInfo(playerName + " Won the game");
     return true;
@@ -67,7 +66,6 @@ const checkForWin = function(moves, playerName) {
 
 const checkForDraw = function(hasWon) {
   if (cells.length == 9 && !hasWon) {
-    // displayResult("draw");
     displayInfo("Match Draw");
   }
 };
@@ -115,13 +113,17 @@ const hasWon = function(playerMoves) {
   return winningArray.some(isSubset.bind(null, playerMoves));
 };
 
+const getPlayerName = function(player) {
+  let playerBlock = document.getElementById(player);
+  return playerBlock.value;
+};
+
 const getPlayerNames = function() {
-  let player1 = prompt("Enter Player - 1 Name :  ");
-  let player2 = prompt("Enter Player - 2 Name :  ");
+  let player1 = getPlayerName("player1");
+  let player2 = getPlayerName("player2");
   let symbolInfo = player1 + "'s symbol is X\n";
   symbolInfo += player2 + "'s symbol is O";
   displayInfo(symbolInfo);
   players.player1.name = player1;
   players.player2.name = player2;
-  console.log(players);
 };
