@@ -6,15 +6,15 @@ const isValidMove = function(id) {
   return !cells.includes(id);
 };
 
-const cycler = function(range) {
+const cycler = function(players) {
   let counter = 0;
-  return function(list) {
-    index = counter++ % range;
-    return list[index];
+  return function() {
+    let index = counter++ % players.length;
+    return players[index];
   };
 };
 
-const getPlayer = cycler(2);
+const getPlayer = cycler(["player1", "player2"]);
 
 const cells = [];
 
@@ -79,7 +79,7 @@ const turnOffListner = function() {
 };
 
 const executeMove = function(id) {
-  let player = getPlayer(["player1", "player2"]);
+  let player = getPlayer();
   let {name, symbol, moves} = players[player];
   displaySymbol(symbol, id);
 
@@ -89,6 +89,12 @@ const executeMove = function(id) {
   let hasWon = checkForWin(moves, name);
   checkForDraw(hasWon);
   players[player]["moves"] = moves;
+};
+
+const makeTableVisible = function() {
+  let table = document.getElementById("table");
+  table.style.visibility = "visible";
+  // table.setAttribute("style", "visibility:visible");
 };
 
 const makeMove = function(id) {

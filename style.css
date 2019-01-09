@@ -79,6 +79,7 @@
 #table {
   margin:auto;
   border:2px solid black;
+  visibility: hidden;
 }
 
 .inputBlocks {
